@@ -24,7 +24,7 @@ export default function ChoosePlanPage() {
   };
   return (
     <div className='flex flex-col items-center'>
-      <img src={LOGO} alt='LOGO' className='mt-10 h-44' />
+      <img src={LOGO} alt='LOGO' className='mt-11 h-44' />
       <div className='flex flex-col items-center'>
         <Text className='mb-4 text-3xl'>Choose a plan</Text>
         <Segmented
@@ -99,6 +99,7 @@ export default function ChoosePlanPage() {
       <Button className='mt-10' size='large' onClick={handleContinue}>
         Continue
       </Button>
+      <br></br>
     </div>
   );
 }
