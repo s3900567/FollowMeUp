@@ -15,20 +15,28 @@ export default function SignUpPage() {
   const onFinish = (values) => {
     dispatch(register(values));
   };
+  // useEffect(() => {
+  //   if (auth.status === 'success') {
+  //     notification.success({
+  //       message: 'Register Success',
+  //       description: 'Welcome to Follow Me Up! Choose one plan and login to continue!',
+  //     });
+  //     navigate('/choose_plan');
+  //   } else if (auth.status === 'failed') {
+  //     notification.error({
+  //       message: 'Register Fail',
+  //       description: auth.error,
+  //     });
+  //   }
+  // }, [auth]);
+
   useEffect(() => {
-    if (auth.status === 'success') {
-      notification.success({
-        message: 'Register Success',
-        description: 'Welcome to Follow Me Up! Choose one plan and login to continue!',
-      });
-      navigate('/choose_plan');
-    } else if (auth.status === 'failed') {
-      notification.error({
-        message: 'Register Fail',
-        description: auth.error,
-      });
-    }
-  }, [auth]);
+    notification.success({
+      message: 'Register Success',
+      description: 'Welcome to Follow Me Up! Choose one plan and login to continue!',
+    });
+    navigate('/choose_plan');
+  }, []);
   return (
     <Row>
       <Col span={12} className='relative h-screen w-full rounded-tr-3xl' style={{ backgroundColor: '#334d6e' }}>

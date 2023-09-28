@@ -62,14 +62,16 @@ export default function ChoosePlanPage() {
           </div>
           <Text className='text-4xl font-bold'>Free</Text>
           <ul className='mt-6'>
-            <li>• Features</li>
-            <li>• The</li>
-            <li>• Platform</li>
-            <li>• Will</li>
-            <li>• Offer</li>
-            <li>• Written</li>
+            <li>• Adding Contacts (Up to 50!)</li>
+            <li>• Tagging</li>
+            <li>• Email reminders (up to 10+)</li>
+            <li>• LinkedIn Integration</li>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
           </ul>
-          <Text className='mt-6 text-xl'>0$/mth</Text>
+          <Text className='mt-6 text-xl'>$0/mth</Text>
         </div>
         <div
           onClick={() => handleChoosePlan('premium')}
@@ -82,14 +84,16 @@ export default function ChoosePlanPage() {
           </div>
           <Text className='text-4xl font-bold'>Premium</Text>
           <ul className='mt-6'>
-            <li>• Features</li>
-            <li>• The</li>
-            <li>• Platform</li>
-            <li>• Will</li>
-            <li>• Offer</li>
-            <li>• Written</li>
+            <li>• Adding Contacts (Unlimited)</li>
+            <li>• Tagging</li>
+            <li>• Automated Email reminders</li>
+            <li>• LinkedIn Integration</li>
+            <li>• Reminders and Tasks</li>
+            <li>• Customization</li>
+            <br></br>
+            <li> and much more</li>
           </ul>
-          <Text className='mt-6 text-xl'>20$/mth</Text>
+          <Text className='mt-6 text-xl'>$20/mth</Text>
         </div>
       </Space>
       <Button className='mt-10' size='large' onClick={handleContinue}>
