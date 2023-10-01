@@ -1,21 +1,24 @@
 # FollowMeUp
-Github Repository for project Follow Me Up 
+GitHub Repository for project Follow Me Up
 
-**Follow Me Up is a SaaS platform and web CRM application.​**
+**Follow Me Up is a SaaS platform and web CRM application.**
 
+## Features Include
 
-**Features Include**
+### Contact Management
 
-*Contact Management*
-Users can manually enter contact details into a specific form
+Users can manually enter contact details into a specific form.
 
-*Categorization & Tagging*
-Categorize and tag contacts based on their relevance or the events in which they met​
+### Categorization & Tagging
 
-*Follow Up Reminder*
-Help users stay on top of their follow-up activities​
+Categorize and tag contacts based on their relevance or the events in which they met.
 
-*Communication Templates​*
-Templates can be tailored to different types of connections or events, making it easy to send relevant messages.​
+### Follow Up Reminder
 
-** How to Run & Use **
+Help users stay on top of their follow-up activities.
+
+### Communication Templates
+
+Templates can be tailored to different types of connections or events, making it easy to send relevant messages.
+
+## How to Run & Use
