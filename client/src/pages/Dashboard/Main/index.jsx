@@ -1,6 +1,10 @@
 import { Avatar, Button, Checkbox, Col, Divider, Empty, Row, Space, Typography } from 'antd';
 import { FiMail } from 'react-icons/fi';
 import { AiOutlineMessage } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLayoutEffect } from 'react';
+import { fetchContactsByUid } from '../../../services/Contacts.services';
+import dayjs from 'dayjs';
 
 const monthConnection = [
   {
@@ -33,6 +37,14 @@ const monthConnection = [
 const { Text, Title } = Typography;
 
 export default function MainDashboard() {
+  const dispatch = useDispatch();
+  const contacts = useSelector((state) => state.contacts.contacts);
+  const auth = useSelector((state) => state.auth);
+  useLayoutEffect(() => {
+    if (auth._id) {
+      dispatch(fetchContactsByUid(auth._id));
+    }
+  }, [auth]);
   return (
     <Row>
       <Col span={16} className='flex flex-col space-y-3'>
@@ -81,26 +93,33 @@ export default function MainDashboard() {
           </div>
         </div>
         {/* line 2 */}
-        <div style={{ height: 400 }} className='w-full rounded-2xl bg-white p-4'>
+        <div style={{ height: 400 }} className='w-full rounded-2xl bg-white p-4 overflow-auto'>
           <Title level={4}>Contacts</Title>
           <Text className='text-sm'>Last contacts</Text>
           <Divider className='my-1' />
           <div className='mt-2 flex flex-col space-y-4'>
-            {[1, 2, 3, 4, 5].map((item) => (
-              <div key={item} className='flex items-center justify-between'>
-                <Space>
-                  <Avatar size='large'>{item}</Avatar>
-                  <div>
-                    <Text className='block font-bold'>Name {item}</Text>
-                    <Text>CEO of Y</Text>
-                  </div>
-                </Space>
-                <Space size='large'>
-                  <Text className='text-base font-medium text-red-500'>{item} day ago</Text>
-                  <AiOutlineMessage size={25} />
-                </Space>
+            {contacts.length > 0 ? (
+              contacts?.map((item) => (
+                <div key={item._id} className='flex items-center justify-between'>
+                  <Space>
+                    <Avatar size='large'>{item.fullName.split(' ').at(-1)}</Avatar>
+                    <div>
+                      <Text className='block font-bold'>{item.fullName}</Text>
+                    </div>
+                  </Space>
+                  <Space size='large'>
+                    <Text className='text-base font-medium text-red-500'>
+                      {dayjs(item.lastContacted).format('DD/MM/YYYY')}
+                    </Text>
+                    <AiOutlineMessage size={25} />
+                  </Space>
+                </div>
+              ))
+            ) : (
+              <div className='w-full h-full mt-10 flex items-center justify-center'>
+                <Empty />
               </div>
-            ))}
+            )}
           </div>
         </div>
         {/* line 3 */}

@@ -7,11 +7,6 @@ logs/
 # Ignore built output
 dist/
 
-# Ignore environment-specific files
-.env
-.env.local
-.env.*.local
-
 # Ignore npm debug log
 npm-debug.log*
 

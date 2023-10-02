@@ -1,9 +1,9 @@
 import { Button, Segmented, Space, Typography, notification } from 'antd';
-import LOGO from '../../assets/LOGO.png';
 import { useState } from 'react';
 import { BsRocketTakeoffFill } from 'react-icons/bs';
 import { FaHandshake } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import LOGO from '../../assets/LOGO.png';
 
 const { Text } = Typography;
 
@@ -18,9 +18,8 @@ export default function ChoosePlanPage() {
   const handleContinue = () => {
     notification.success({
       message: 'Thank you for choosing us!',
-      description: 'Please login to continue!',
     });
-    navigate('/login');
+    navigate('/payment');
   };
   return (
     <div className='flex flex-col items-center'>
@@ -53,9 +52,8 @@ export default function ChoosePlanPage() {
       <Space direction='horizontal' size='large' className='mt-12'>
         <div
           onClick={() => handleChoosePlan('free')}
-          className={`flex w-96 cursor-pointer flex-col items-center justify-center rounded-2xl border py-12 ${
-            plan === 'free' && 'border-blue-700'
-          } transition-all`}
+          className={`flex w-96 cursor-pointer flex-col items-center justify-center rounded-2xl border py-12 ${plan === 'free' && 'border-blue-700'
+            } transition-all`}
         >
           <div className='flex h-10 w-10 items-center justify-center rounded-full bg-yellow-500'>
             <BsRocketTakeoffFill size={30} className='text-slate-500' />
@@ -73,9 +71,8 @@ export default function ChoosePlanPage() {
         </div>
         <div
           onClick={() => handleChoosePlan('premium')}
-          className={`flex w-96 cursor-pointer flex-col items-center justify-center rounded-2xl border py-12 ${
-            plan === 'premium' && 'border-blue-700'
-          } transition-all`}
+          className={`flex w-96 cursor-pointer flex-col items-center justify-center rounded-2xl border py-12 ${plan === 'premium' && 'border-blue-700'
+            } transition-all`}
         >
           <div className='flex h-10 w-10 items-center justify-center rounded-full bg-yellow-500'>
             <FaHandshake size={30} className='text-slate-500' />

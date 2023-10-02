@@ -1,9 +1,11 @@
-import { Button, Input, Table, Tabs } from 'antd';
-import { TABS_CONTENT, TABLE_COLUMNS } from '../../../constants/ContactsPage.constants';
-import { useState } from 'react';
+import { Button, Input, Table } from 'antd';
 import dayjs from 'dayjs';
 import { FiUserPlus } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { TABLE_COLUMNS } from '../../../constants/ContactsPage.constants';
+import { useLayoutEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchContactsByUid } from '../../../services/Contacts.services';
 
 const dataTable = [
   {
@@ -36,10 +38,16 @@ const dataTable = [
 ];
 
 export default function ContactsPage() {
-  const [tabPane, setTabPane] = useState('all_contacts');
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const contacts = useSelector((state) => state.contacts.contacts);
+  useLayoutEffect(() => {
+    if (auth._id) {
+      dispatch(fetchContactsByUid(auth._id));
+    }
+  }, [auth._id]);
   return (
     <main>
-      <Tabs defaultActiveKey={tabPane} type='card' size='large' items={TABS_CONTENT} onChange={(e) => setTabPane(e)} />
       <div className='flex items-center justify-between'>
         <Input.Search size='large' placeholder='Search ...' className='w-80' />
         <Link to='./new'>
@@ -48,7 +56,7 @@ export default function ContactsPage() {
           </Button>
         </Link>
       </div>
-      <Table className='mt-10' dataSource={dataTable} columns={TABLE_COLUMNS} />
+      {contacts.length > 0 && <Table className='mt-10' dataSource={contacts} columns={TABLE_COLUMNS} />}
     </main>
   );
 }

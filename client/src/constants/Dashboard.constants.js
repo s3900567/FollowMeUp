@@ -15,12 +15,12 @@ export const MENU_ITEMS = [
     icon: createElement(LuStretchHorizontal, { className: 'inline text-xl' }),
     to: './tasks',
   },
-  {
-    key: 'emails',
-    label: 'Emails',
-    icon: createElement(RxEnvelopeClosed, { className: 'inline text-xl' }),
-    to: './emails',
-  },
+  // {
+  //   key: 'emails',
+  //   label: 'Emails',
+  //   icon: createElement(RxEnvelopeClosed, { className: 'inline text-xl' }),
+  //   to: './emails',
+  // },
   {
     key: 'contacts',
     label: 'Contacts',

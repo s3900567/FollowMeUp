@@ -21,7 +21,7 @@ const events = [
     title: 'Task 2',
     date: '2023-09-26',
     start: '08:00',
-    end: '16:00',
+    end: '10:20',
     color: 'blue',
   },
   {

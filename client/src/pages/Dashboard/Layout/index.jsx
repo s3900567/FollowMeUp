@@ -1,25 +1,40 @@
-import { Avatar, Button, Layout, Select, Typography } from 'antd';
+import { Avatar, Button, Layout, Select, Typography, notification } from 'antd';
 import { useState } from 'react';
 import { FaHeadphonesSimple } from 'react-icons/fa6';
 import { HiBell, HiOutlineLogout } from 'react-icons/hi';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { MENU_ITEMS } from '../../../constants/Dashboard.constants';
+import { useDispatch, useSelector } from 'react-redux';
+import LOGO_APP from '../../../assets/LOGO_APP.png';
+import { logout } from '../../../services/Auth.services';
+import Cookies from 'js-cookie';
 const { Header, Content, Sider } = Layout;
 const { Text } = Typography;
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
   const param = useLocation();
-  const [activeMenu, setActiveMenu] = useState(param.pathname.split('/').at(-1));
+  const [activeMenu, setActiveMenu] = useState(param.pathname.split('/')[2] || 'dashboard');
   const handleRouter = (key, path) => {
     setActiveMenu(key);
     navigate(path);
+  };
+  const handleLogout = () => {
+    dispatch(logout());
+    Cookies.remove('token');
+    notification.success({
+      message: 'Logout successfully!',
+    });
+    navigate('/');
+    window.location.reload();
   };
   return (
     <Layout>
       <Sider className='relative' breakpoint='lg' width={296} theme='light' collapsedWidth='0'>
         <div className='flex h-24 w-full items-center justify-center'>
-          <Text className='text-2xl font-medium'>Follow Me Up</Text>
+          <img className='w-2/3' src={LOGO_APP} alt='LOGO_APP' />
         </div>
         <div className='mt-6 flex flex-col space-y-3 px-8'>
           {MENU_ITEMS.map((item) => (
@@ -57,6 +72,7 @@ const DashboardLayout = () => {
               type='text'
               className='flex items-center space-x-1 text-xl'
               icon={<HiOutlineLogout className='inline' size={21} />}
+              onClick={handleLogout}
             >
               Logout
             </Button>
@@ -69,14 +85,14 @@ const DashboardLayout = () => {
             <Text className='text-3xl font-bold uppercase'>{activeMenu}</Text>
             <div className='mr-4 flex items-center space-x-6'>
               <Select defaultValue='username' status='warning'>
-                <Select.Option value='username'>User name</Select.Option>
+                <Select.Option value='username'>{auth?.fullName}</Select.Option>
               </Select>
               <HiBell size={20} className='text-blue-500' />
               <Avatar className='bg-orange-500'>USER</Avatar>
             </div>
           </div>
         </Header>
-        <Content style={{ backgroundColor: '#f4f5fa' }} className='overflow-auto'>
+        <Content style={{ backgroundColor: '#f4f5fa' }} className='overflow-auto w-full h-full'>
           <div className='mx-5 my-4'>
             <Outlet />
           </div>

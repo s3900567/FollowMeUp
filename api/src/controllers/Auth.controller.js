@@ -69,6 +69,16 @@ const AuthController = {
     if (!users) return error(res, null, 'No users found');
     return success(res, users, 'All users');
   },
+  changeInfo: async (req, res) => {
+    const { fullName, phoneNumber, avatar, _id } = req.body;
+    const user = await AuthModule.findOne({ _id });
+    if (!user) return error(res, null, 'User not found');
+    user.avatar = avatar;
+    user.fullName = fullName;
+    user.phoneNumber = phoneNumber;
+    await user.save();
+    return success(res, user, 'User info updated');
+  },
 };
 
 export default AuthController;

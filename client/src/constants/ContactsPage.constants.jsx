@@ -1,4 +1,6 @@
-import { Tag } from 'antd';
+import { Button, Tag } from 'antd';
+import dayjs from 'dayjs';
+import { CiMail } from 'react-icons/ci';
 
 const TABS_CONTENT = [
   {
@@ -18,8 +20,8 @@ const TABS_CONTENT = [
 const TABLE_COLUMNS = [
   {
     title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'fullName',
+    key: 'fullName',
   },
   {
     title: 'Email',
@@ -28,13 +30,16 @@ const TABLE_COLUMNS = [
   },
   {
     title: 'Phone',
-    dataIndex: 'phone',
-    key: 'phone',
+    dataIndex: 'phoneNumber',
+    key: 'phoneNumber',
   },
   {
     title: 'Last contacted',
     dataIndex: 'lastContacted',
     key: 'lastContacted',
+    render: (date) => {
+      return dayjs(date).format('DD/MM/YYYY');
+    },
   },
   {
     title: 'Tags',
@@ -50,8 +55,17 @@ const TABLE_COLUMNS = [
   },
   {
     title: 'Created',
-    dataIndex: 'createDate',
-    key: 'createDate',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    render: (date) => {
+      return dayjs(date).format('HH:mm DD/MM/YYYY');
+    },
+  },
+  {
+    title: 'Action',
+    dataIndex: '',
+    key: 'x',
+    render: () => <Button icon={<CiMail className='inline mb-1' />} />,
   },
 ];
 
