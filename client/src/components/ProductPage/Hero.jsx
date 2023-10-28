@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
 import background from '../../assets/ProductPage/nasa.jpg';
 import overlayImage from '../../assets/ProductPage/Dashboard.png';
+import { Typography } from 'antd';
+
+const { Title, Text } = Typography;
 
 const Hero = () => {
   return (
@@ -13,7 +15,7 @@ const Hero = () => {
       >
         <div className='max-w-[1240px] mx-auto text-center'>
           <h1 className='text-6xl font-bold font-poppins py-2'>Innovative Solutions</h1>
-          <p className='py-1 text-1xl mb-2'>CRM specifically for networking</p>
+          <Text className='py-1 text-1xl mb-2 text-white'>CRM specifically for networking</Text>
         </div>
       </div>
 

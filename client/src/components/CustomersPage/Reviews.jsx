@@ -1,8 +1,10 @@
-import React from 'react';
+import { Typography } from 'antd';
 import { FaStar } from 'react-icons/fa';
 import person1 from '../../assets/CustomersPage/person1.jpg';
 import person2 from '../../assets/CustomersPage/person2.jpg';
 import person3 from '../../assets/CustomersPage/person3.jpg';
+
+const { Title, Text } = Typography;
 
 const Reviews = () => {
   const testimonials = [
@@ -45,8 +47,8 @@ const Reviews = () => {
                   }}
                 ></div>
               </div>
-              <h5 className='mb-2 text-lg font-bold'>{testimonial.name}</h5>
-              <p className='mb-4'>{testimonial.review}</p>
+              <Text className='mb-2 text-lg font-bold'>{testimonial.name}</Text>
+              <Text className='mb-4 block'>{testimonial.review}</Text>
               <div className='mb-0 flex justify-center'>
                 {Array.from({ length: testimonial.stars }, (_, i) => (
                   <FaStar key={i} className='w-5 text-warning' />

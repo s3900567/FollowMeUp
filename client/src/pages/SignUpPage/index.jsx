@@ -1,6 +1,6 @@
 import { Button, Checkbox, Col, Form, Input, Row, Typography, notification } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import LOGO from '../../assets/LOGO.png';
+import LOGO from '../../assets/LOGO_APP.png';
 import RegisterIllus from '../../assets/RegisterIllus.svg';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

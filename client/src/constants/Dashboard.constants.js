@@ -1,13 +1,13 @@
-import { RxDashboard, RxEnvelopeClosed } from 'react-icons/rx';
-import { LuStretchHorizontal, LuUser2, LuSettings } from 'react-icons/lu';
 import { createElement } from 'react';
+import { LuCalendarRange, LuSettings, LuStretchHorizontal, LuUser2 } from 'react-icons/lu';
+import { RxDashboard } from 'react-icons/rx';
 
 export const MENU_ITEMS = [
   {
     key: 'dashboard',
     label: 'Dashboard',
     icon: createElement(RxDashboard, { className: 'inline text-xl' }),
-    to: './',
+    to: '',
   },
   {
     key: 'tasks',
@@ -16,10 +16,10 @@ export const MENU_ITEMS = [
     to: './tasks',
   },
   {
-    key: 'emails',
-    label: 'Emails',
-    icon: createElement(RxEnvelopeClosed, { className: 'inline text-xl' }),
-    to: './emails',
+    key: 'calendar',
+    label: 'Calendar',
+    icon: createElement(LuCalendarRange, { className: 'inline text-xl' }),
+    to: './calendar',
   },
   {
     key: 'contacts',

@@ -2,7 +2,7 @@ import { Button, Col, Form, Input, Row, Typography, notification } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import LOGO from '../../assets/LOGO.png';
+import LOGO from '../../assets/LOGO_APP.png';
 import TimeIllus from '../../assets/Main.png';
 import MCTIllus from '../../assets/mainContainer.png';
 import { login } from '../../services/Auth.services';

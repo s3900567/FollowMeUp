@@ -20,6 +20,9 @@ const AuthAPI = {
       return res;
     }
   },
+  changeInfo: async (data) => {
+    return await AxiosClient.put(API_ENDPOINTS.CHANGE_INFO, data);
+  },
 };
 
 export default AuthAPI;

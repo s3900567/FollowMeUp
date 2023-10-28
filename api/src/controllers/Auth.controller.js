@@ -10,19 +10,29 @@ const AuthController = {
     if (reqUser) {
       error(res, null, 'Email already exist');
     } else {
-      const hashPassword = bcrypt.hashSync(password, 10);
-      AuthModule.create({
-        email,
-        password: hashPassword,
-        fullName,
-        phoneNumber,
-      })
-        .then((data) => {
-          success(res, data, 'User created successfully');
-        })
-        .catch((err) => {
-          error(res, err, 'User creation failed');
+      try {
+        const hashPassword = bcrypt.hashSync(password, 10);
+        const dataForAccessToken = {
+          email,
+        };
+        const token = await AuthServices.generateToken(dataForAccessToken);
+        if (!token) {
+          return error(res, null, 'Token generation failed');
+        }
+        const newUser = await AuthModule.create({
+          email,
+          password: hashPassword,
+          fullName,
+          phoneNumber,
         });
+        const data = {
+          token,
+          ...newUser._doc,
+        };
+        return success(res, data, 'User created successfully');
+      } catch (err) {
+        return error(res, null, 'User creation failed');
+      }
     }
   },
 
@@ -60,6 +70,9 @@ const AuthController = {
   loginWithJWT: async (req, res) => {
     const token = req.header('authorization');
     const { email } = await AuthServices.verifyToken(token);
+    if (!email) {
+      return error(res, null, 'Invalid token');
+    }
     const user = await AuthModule.findOne({ email });
     if (!user) return error(res, null, 'User not found');
     return success(res, user, 'User found');
@@ -68,6 +81,34 @@ const AuthController = {
     const users = await AuthModule.find();
     if (!users) return error(res, null, 'No users found');
     return success(res, users, 'All users');
+  },
+  changeInfo: async (req, res) => {
+    const { fullName, phoneNumber, avatar, _id } = req.body;
+    const user = await AuthModule.findOne({ _id });
+    if (!user) return error(res, null, 'User not found');
+    user.avatar = avatar;
+    user.fullName = fullName;
+    user.phoneNumber = phoneNumber;
+    await user.save();
+    return success(res, user, 'User info updated');
+  },
+  changePassword: async (req, res) => {
+    const { _id, oldPassword, newPassword } = req.body;
+    const user = await AuthModule.findOne({ _id });
+    if (!user) return error(res, null, 'User not found');
+    const reqPassword = await bcrypt.compare(oldPassword, user.password);
+    if (!reqPassword) return error(res, null, 'Old password incorrect');
+    const hashPassword = bcrypt.hashSync(newPassword, 10);
+    user.password = hashPassword;
+    await user.save();
+    return success(res, user, 'Password changed');
+  },
+
+  deleteUser: async (req, res) => {
+    const { _id } = req.body;
+    const user = await AuthModule.findOneAndDelete({ _id });
+    if (!user) return error(res, null, 'User not found');
+    return success(res, user, 'User deleted');
   },
 };
 

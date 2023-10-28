@@ -3,6 +3,9 @@ import Schema from '../utils/MongoDB';
 
 const AuthSchema = new Schema(
   {
+    avatar: {
+      type: String,
+    },
     email: {
       type: String,
       required: true,

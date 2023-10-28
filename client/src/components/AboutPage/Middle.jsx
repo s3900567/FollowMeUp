@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import header from '../../assets/AboutPage/collaboration.jpg';
 
 export const Middle = () => {
